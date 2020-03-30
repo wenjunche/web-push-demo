@@ -46,6 +46,7 @@ const sendNotification = (subscription, dataToSend='') => {
 
 //route to test send notification
 app.get('/send-notification', (req, res) => {
+  console.log('sending notification')
   dummyDb.subscriptions.forEach(sub => {
     const message = 'Hello World'
     sendNotification(sub, message)
