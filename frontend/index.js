@@ -23,9 +23,27 @@ const requestNotificationPermission = async () => {
   }
 };
 
+const showLocalNotification = (title, body, swRegistration) => {
+  const options = {
+      body,
+      // here you can add more properties like icon, image, vibrate, etc.
+  };
+  swRegistration.showNotification(title, options);
+}
+
+
 const main = async () => {
   check();
   const swRegistration = await registerServiceWorker();
   const permission = await requestNotificationPermission();
+  showLocalNotification('This is title', 'this is the message', swRegistration);
 };
 // main(); we will not call main in the beginning.
+
+const push = async() => {
+  const SERVER_URL = "http://localhost:4000/send-notification";
+  const response = await fetch(SERVER_URL, {
+    method: "get"
+  });
+  return response.json();
+}

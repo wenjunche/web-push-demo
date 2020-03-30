@@ -25,14 +25,15 @@ const saveSubscription = async subscription => {
   return response.json();
 };
 
-self.addEventListener("install", async () => {
+self.addEventListener("activate", async () => {
   // This will be called only once when the service worker is installed for first time.
   try {
     const applicationServerKey = urlB64ToUint8Array(
-      "BJ5IxJBWdeqFDJTvrZ4wNRu7UY2XigDXjgiUBYEYVXDudxhEs0ReOJRBcBHsPYgZ5dyV8VjyqzbQKS8V7bUAglk"
+      "BE9-BuT55Ls7Jc5uA7wNgwwpp3jLAISzbJ0Tm8_EjnM4hToCdGbDFX-GdqWB0_isBRpKe1T8SxGgO7kgcu9Oj_c"
     );
     const options = { applicationServerKey, userVisibleOnly: true };
     const subscription = await self.registration.pushManager.subscribe(options);
+    console.log(JSON.stringify(subscription))
     const response = await saveSubscription(subscription);
     console.log(response);
   } catch (err) {
